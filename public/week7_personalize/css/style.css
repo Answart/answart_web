@@ -5,6 +5,7 @@ body {
   width:100%;
   height:100%;
   margin: 40px;
+  font-weight:normal;
 }
 
 a {
@@ -17,8 +18,11 @@ a:hover {
 }
 
 h1 {
-  font-size: 1.750em;
+  font-size: 0.75em;
   letter-spacing: -1.5px;
+  border-bottom: 1px dashed rgb(229, 229, 229);
+  text-transform:uppercase;
+  font-weight:normal;
 }
 
 h2 {
@@ -27,31 +31,38 @@ h2 {
 }
 
 .btn {
-  color: #FAF3BC;
-  background: #4FB69F url('img/texture.png') no-repeat right top;
-  padding: 15px 30px;
-  margin: 40px 0px;
-  border-radius: 25px;
-  text-transform: uppercase;
+  background-color:#da881e;
+  /*-- background: #da881e url('../img/newbuttonhover.png') no-repeat right top; --*/
+  padding: 1px 10px;
+  margin: 2px 0px;
+  border-radius: 5px;
+  border-bottom: 1px solid #da881e;
+  font-weight:normal;
+  color: #000;
+  font-size:0.8em;
 }
 
 .btn:hover {
   background-color: #4CC4A7;
+  color: #000;
 }
 
 ul.nav {
-  margin: 120px 0 0 0;
-  list-style: none;
-  float: right;
+  margin: 2px 2px;
+  list-style:none;
+  float:left;
+  margin-bottom:20px;
 }
 
 ul.nav li {
-  float: left;
+  float:left;
   margin-right: 40px;
+  padding:2px 0px 2px 5px;
 }
 
 ul.nav li a {
-  color: #FAF3BC;
+  color: #000;
+  margin-bottom:20px;
 }
 
 #intro {
@@ -67,21 +78,13 @@ ul.nav li a {
   border: 8px solid #FAF3BC;
 }
 
-#copyright {
-  border-top: 8px solid #2A0400;
-  padding: 10px 0px;
-  margin: 15px 0px;
-  text-align: center;
-}
-
 #footer {
-  width:100%;
   border-top: 2px solid grey;
-  padding: 10px 10px 0px 10px;
-  margin: 0px;
+  padding-top:50px;
   text-align:left;
   bottom:0px;
   position:inherit;
+  font-size:0.75em;
 }
 
 .panel {
@@ -90,10 +93,19 @@ ul.nav li a {
   border: 1px dotted grey;
 }
 
+.right {
+  text-align:right;
+}
+.left {
+  text-align:left;
+}
+.center {
+  text-align:center;
+}
 
-
-
-
+img {
+  margin: 0px 0px -7px 0px;
+}
 
 
 

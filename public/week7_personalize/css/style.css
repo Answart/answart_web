@@ -31,20 +31,23 @@ h2 {
 }
 
 .btn {
-  background-color:#da881e;
+  background-color:transparent;
   /*-- background: #da881e url('../img/newbuttonhover.png') no-repeat right top; --*/
   padding: 1px 10px;
   margin: 2px 0px;
   border-radius: 5px;
   border-bottom: 1px solid #da881e;
+  border-top: 1px solid #da881e;
   font-weight:normal;
   color: #000;
   font-size:0.8em;
 }
 
 .btn:hover {
-  background-color: #4CC4A7;
+  background-color: #e8e5e5;
   color: #000;
+  border-bottom: 1px solid #bfbdbd;
+  border-top: 1px solid #bfbdbd;
 }
 
 ul.nav {
@@ -104,7 +107,7 @@ ul.nav li a {
 }
 
 img {
-  margin: 0px 0px -7px 0px;
+  margin: 0px 0px -5.5px 0px;
 }
 
 

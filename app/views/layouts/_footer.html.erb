@@ -1,14 +1,14 @@
-<footer class="footer">
-  <small>
-    <a href="http://railstutorial.org/">Rails Tutorial</a>
-    by Michael Hartl
-  </small>
-  <nav>
-    <ul>
-      <li><%= link_to "About",    about_path %></li>
-      <li><%= link_to "Contact",  contact_path %></li>
-      <li><%= link_to "Site Map", sitemap_path %></li>
-      <li><a href="http://news.railstutorial.org/">News</a></li>
-    </ul>
-  </nav>
-</footer>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+  <div class="container">
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home",    root_path %></li>
+        <li><%= link_to "Portfolio",    main_pages_portfolio_path %></li>
+        <li><%= link_to "Blog",    main_pages_blog_path %></li>
+        <li><%= link_to "Contact",    main_pages_contact_path %></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div>
+</nav>

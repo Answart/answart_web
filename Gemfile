@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 
-gem 'bootstrap-sass', '2.3.2.0' # bootstrap resource gem
+gem 'sass-rails', '~> 4.0.0' # Use SCSS for stylesheets, sass-rails needs to be higher than 3.2
+gem 'bootstrap-sass', '~> 3.1.0' # gem 'bootstrap-sass', '2.3.2.0' # bootstrap resource gem
 gem 'bcrypt-ruby', '3.0.1' # state-of-the-art hash function called bcrypt to irreversibly encrypt the password to form the password hash
 gem 'faker', '1.1.2' # to make sample users with semi-realistic names and email addresses
 gem 'will_paginate', '3.0.4'
@@ -24,7 +26,7 @@ group :test do
   gem 'capybara', '2.1.0' # allows to simulate a user’s interaction with the sample application using a natural English-like syntax
 end
 
-gem 'sass-rails', '~> 4.0.0' # Use SCSS for stylesheets
+
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.0.0' # Use CoffeeScript for .js.coffee assets and views
 gem 'jquery-rails' # Use jquery as the JavaScript library

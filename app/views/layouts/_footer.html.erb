@@ -1,14 +1,37 @@
-<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+<nav class="navbar navbar-default navbar-bottom" role="navigation">
   <div class="container">
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",    root_path %></li>
-        <li><%= link_to "Portfolio",    main_pages_portfolio_path %></li>
-        <li><%= link_to "Blog",    main_pages_blog_path %></li>
-        <li><%= link_to "Contact",    main_pages_contact_path %></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+      <div class="col-sm-6 col-md-4">
+        <h3>Alexandra Swart<span class="label label-default"></span></h3>
+        <div class="caption">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, dolorum, eius, dolorem autem alias ducimus quisquam error debitis doloremque voluptas eveniet deleniti magni nemo magnam harum commodi facilis sed blanditiis!
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="btn-group-vertical">
+          <ul class="list-group">
+            <li class="list-group-item"><%= link_to "Home",    root_path %></li>
+            <li class="list-group-item"><%= link_to "Portfolio",    main_pages_portfolio_path %></li>
+            <li class="list-group-item"><%= link_to "Blog",    main_pages_blog_path %></li>
+            <li class="list-group-item"><%= link_to "Contact",    main_pages_contact_path %></li>
+          </ul>
+        </div>
+        
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <h3><span class="label label-default">Contact</span></h3>
+        <div class="caption">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, dolorum, eius, dolorem autem alias ducimus quisquam error debitis doloremque voluptas eveniet deleniti magni nemo magnam harum commodi facilis sed blanditiis!
+          </p>
+        </div>
+      </div>
+
+
+
+<!-- /.navbar-collapse -->
 
   </div>
 </nav>

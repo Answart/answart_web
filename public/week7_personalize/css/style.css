@@ -1,7 +1,7 @@
 body {
   font-family: 'Nunito', sans-serif;
   color: #412c1d;
-  background-color: #c8bda7;
+  background-color: #fff;
   width:1200px;
   height:auto;
   margin: 40px auto;
@@ -60,7 +60,14 @@ ul {
   list-style:none;
 }
 li a {
-  color: #fff;
+  color: #71996e;
+  text-align:center;
+}
+li a:hover {
+  color: #000;
+}
+li img {
+  margin: 0px 0px -10.5px 0px;
 }
 
 #footer {
@@ -90,11 +97,15 @@ li a {
 }
 
 img {
-  margin: 0px 0px -5.5px 0px;
+  margin-bottom: -5px;
 }
 
 #sidebar {
-  border-right: 1px solid black;
+  border-right: 1px solid #71996e;
+  float:left;
+  margin:4px;
+  top:0;
+  width: 235px;
 }
 
 .navbox {
@@ -107,18 +118,18 @@ img {
 }
 
 #maincolumn {
-  padding:auto;
-  margin:auto;
+  margin:4px;
+  width:880px;
+  padding:0px;
   top:0;
-
-  float:right;
+  float:left;
   position:relative;
   display: block;
 }
 
 .nav {
   float:center;
-  width:810px;
+  width:840px;
   border-width:1px 0;
   list-style:none;
   margin:0;
@@ -133,5 +144,19 @@ img {
 .nav a {
   display:inline-block;
   padding:10px;
+  color:#000;
+}
+.nav a:hover {
+  color:#fff;
+}
+#mainbanner {
+  margin-bottom:5px;
+  width:900px;
+  margin:0;
 }
 
+#mainevents {
+  margin: 5px 0;
+  padding:5px;
+  width:880px;
+}

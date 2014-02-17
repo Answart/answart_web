@@ -30,9 +30,9 @@
 .grid_10,
 .grid_11,
 .grid_12 {
-  padding:10px 5px;
+  padding:2px;
   margin:4px;
-  float: center;
+  float: left;
   display: block;
 }
 
@@ -49,11 +49,12 @@
 }
 
 .container{
-  width:1155px;
+  width:1000px;
   margin:auto;
   position:relative;
   padding: 1px;
   text-align: center;
+  float:center;
   background-color: transparent;
 }
 

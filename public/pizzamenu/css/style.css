@@ -12,6 +12,7 @@ body {
 a {
   color:#f0a400;
   text-decoration: none;
+  font-size:0.95em;
 }
 
 a:hover {
@@ -86,7 +87,7 @@ li img {
 
 .panel {
   background-color: white;
-  border:1px dotted grey;
+  border:2px dotted grey;
 }
 
 .right {
@@ -101,6 +102,12 @@ li img {
 
 img {
   margin-bottom: -5px;
+}
+
+.mainimg {
+  position:relative;
+  text-align:left;
+  width:745px;
 }
 
 #sidebar {
@@ -129,12 +136,12 @@ img {
 
 #maincolumn {
   margin:4px;
-  width:900px;
+  width:600px;
+/* width:900px; */
   padding:0px;
   top:0;
-  float:left;
+  left:0;
   position:relative;
-  display: block;
   background-color:#f6f1e6;
 }
 
@@ -161,7 +168,7 @@ img {
 .nav a:hover {
   color:#000;
 }
-#mainbanner {
+.mainbanner {
   width:890px;
   margin:0;
 }
@@ -172,14 +179,12 @@ img {
   margin: 5px 5px;
   font-weight:normal;
   color: #fff;
-  font-size:2.75em;
+  font-size:1.75em;
   opacity:0.6;
 
   position:absolute;
   bottom:81%;
-  right:50%;
-  height:auto;
-  width:auto;
+  right:70%;
   text-align:center;
 }
 

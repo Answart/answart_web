@@ -18,6 +18,17 @@
     <!-- BODY -->
     <div id="maincolumn">
 
+<b>Challenege: Reverse Polish Notation Calculator<b>
+
+<ul>
+<li>calc = RPNCalculator.new
+<li>calc.evaluate(‘1 2 +’) #                                  => 3</li>
+<li>calc.evaluate(‘2 5 *’) #                                  => 10</li>
+<li>calc.evaluate(‘50 20 -‘) #                                => 30</li>
+<li>calc.evaluate(‘70 10 4 + 5 * -‘) # 70 - ((10 + 4) * 5)    => 0</li>
+<li>calc.evaluate(‘20 10 5 4 + * -‘) # (20 - (10 *(5+4))      => -70</li>
+</ul>
+
 <p>After understanding the logic of the exercise, my pairng partner and I thought we could either calculate the string using regex or separate the string by integers and operands and manually work each Integers combo with their operand until all that is left is the result (using eval).</p>
 
 <p>My plan for working out the regexp strategy was to transform the strings into Integers (/\d+/) unless it was an operand (/\+|\-|\*/) (which would just be escaped). From there, I could calculate the Integer combo with its operand, depending on their place in the Array. The trick was to only use the operand in the string on the two integers before it. Each IntegerOperandInteger result would be pushed into a variable until all expressions were calculated. I ran into trouble when trying to escape the operands from the string {|x| "\\" + x} and when I realized that I needed current calculations to interact with previous results. I needed the results to stay in the array.</p>

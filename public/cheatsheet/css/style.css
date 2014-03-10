@@ -1,13 +1,13 @@
 body {
   font-family: 'Nunito', sans-serif;
   color: #000; /* For Safari */
-  background: -webkit-gradient(linear, 0 0, 0 100%, from(#212f60), to(white));
-  background: -webkit-linear-gradient(#212f60, white);
-  background: -moz-linear-gradient(#212f60, white);
-  background: -o-linear-gradient(#212f60, white);
-  background: linear-gradient(#212f60, white); /* For Opera 11.1 to 12.0 */ /* For Firefox 3.6 to 15 */ /* Standard syntax */
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#bf1321), to(#dd4b39));
+  background: -webkit-linear-gradient(#bf1321, #dd4b39);
+  background: -moz-linear-gradient(#bf1321, #dd4b39);
+  background: -o-linear-gradient(#bf1321, #dd4b39);
+  background: linear-gradient(#bf1321, #dd4b39); /* For Opera 11.1 to 12.0 */ /* For Firefox 3.6 to 15 */ /* Standard syntax */
   width:1100px;
-  height:auto;
+  height:100%;
   margin: 10px auto 20px auto;
   font-weight:normal;
   position:relative;

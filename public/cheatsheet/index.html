@@ -17,7 +17,138 @@
   <div class="container">
     <!-- BODY -->
     <div id="maincolumn">
- 
+
+<p>After understanding the logic of the exercise, my pairng partner and I thought we could either calculate the string using regex or separate the string by integers and operands and manually work each Integers combo with their operand until all that is left is the result (using eval).</p>
+
+<p>My plan for working out the regexp strategy was to transform the strings into Integers (/\d+/) unless it was an operand (/\+|\-|\*/) (which would just be escaped). From there, I could calculate the Integer combo with its operand, depending on their place in the Array. The trick was to only use the operand in the string on the two integers before it. Each IntegerOperandInteger result would be pushed into a variable until all expressions were calculated. I ran into trouble when trying to escape the operands from the string {|x| "\\" + x} and when I realized that I needed current calculations to interact with previous results. I needed the results to stay in the array.</p>
+
+<p>Looking further into regexp, I learned more about MatchData objects. With MatchData objects I can have a group of scanned data from a variable (in this case string) interact with other scanned data (from string). Essentially,</p>
+
+<ol>
+<li>Calculate the result for the first (Integer)(Integer)(Operand) in the string, </li>
+<li>Replace the calculated numbers with the result, 3. then repeat for the next (Integer)(Integer)(Operand) until all that is left is the result. To visualize:</li>
+</ol>
+
+<ul>
+<li>EX: '70 10 4 + 5 * -'</li>
+<li>'(Integer) (Integer) (Integer) (Operand) (Integer) (Operand) (Operand)'</li>
+<li>The first expression to work out was...</li>
+<li>'(Integer) <(Integer) (Integer) (Operand)> (Integer) (Operand) (Operand)'</li>
+<li>which would result in...</li>
+<li>'(Integer) <(Integer)> (Integer) (Operand) (Operand)'</li>
+<li>The next expression would be...</li>
+<li>'(Integer) <(Integer) (Integer) (Operand)> (Operand)'</li>
+<li>resulting in...</li>
+<li>'(Integer) <(Integer)> (Operand)'</li>
+<li>then finally...</li>
+<li>'<(Integer) (Integer) (Operand)>'</li>
+<li>into the answer.</li>
+<li>'<(Integer)>'</li>
+<li>All of this within the string and the result returned as result.to_i</li>
+</ul>
+</p>
+
+<p>To work this out with regexp: (Integer) (Integer) (Operand) from the string is (\d+/) (\d+/) ([+|\-|\*]). The first (/\d+/) is now known as $1, the second (/\d+/) is known as $2, and ([+|\-|\*]) is $3. $number is known as a MatchData object. With $1, $2, and $3 I could maybe have the objects evaluate($1 $3 $2). So to use regexp with a string, I can use a regexp expression with the match method on the string.</p>
+
+<ul>
+<li>string = '70 10 4 + 5 * -'              => "70 10 4 + 5 * -"</li>
+<li>regexp = /(\d+) (\d+) ([+|\-|\*])/      => /(\d+)\s(\d+)\s([+|\-|\*])/</li>
+<li>matchobjects = regexp.match string      => #< MatchData "10 4 +" 1:"10" 2:"4" 3:"+" ></li>
+<li>OR</li>
+<li>matchobjects = string.match regexp      => #< MatchData "10 4 +" 1:"10" 2:"4" 3:"+" ></li>
+</ul>
+
+<p>With # < MatchData "10 4 +" 1:"10" 2:"4" 3:"+" > ...</p>
+
+<ul>
+<li>matchobjects[0] = "10 4 +"  string which was matched</li>
+<li>matchobjects[1] = "10"      first group which was matched AKA $1</li>
+<li>matchobjects[2] = "4"       second group AKA $2</li>
+<li>matchobjects[3] = "+"       third group AKA $3</li>
+</ul>
+
+<p>Now for calculation...</p>
+
+<ul>
+<li>result = eval($1 + $3 + $2) => 14</li>
+<li>$1.to_i + $3 + $2.to_i  => TypeError: nil can't be coerced into Fixnum in '+'</li>
+</ul>
+
+<p>It was successful only for addition and subtraction between the Integers. I needed to find a method which was also inclusive to multiplication. My search brought me to the .send method. The setup is like so:</p>
+
+<ul>
+<li>answer = number1.send(operand, number2)</li>
+<li>EX: string = '1 + 5'</li>
+<li>regexp = /(\d+) ([\-|\+|\*]) (\d+)/     => /(number1) (operand) (number2)/</li>
+<li>matchobjects = string.match regexp      => /(1) (+) (5)/ AKA #< MatchData "1 + 5" 1:"1" 2:"+" 3:"5" ></li>
+<li>answer = ($1.to_i).send($2, $3.to_i)    => 6</li>
+<li>EX: string2 = '1 5 +'</li>
+<li>regexp = /(\d+) (\d+) ([\-|\+|\*])/     => /(number1) (number2) (operand)/</li>
+<li>matchobjects = string.match regexp      => /(1) (5) (+)/ AKA #< MatchData "1 5 +" 1:"1" 2:"5" 3:"+" ></li>
+<li>answer = ($1.to_i).send($3, ($2.to_i))  => 6</li>
+</ul>
+
+<p>Because .send seemed to only work while the operand was a String(reseach more about that later), it wasn't necessary to convert the input into Integers and escaped operands - only to .to_i the numbers within the .send method.<p>
+
+<p>To replace the numbers and operand with the answer I used gsub!.</p>
+
+<ul>
+<li>string.gsub!(matchobjects[0], result.to_s)      => Replace calculated numbers with answer (Step 2)</li>
+<li>(matchobjects[0] is "10 4 +")</li>
+<li>'70 10 4 + 5 * -' has become '70 14 + 5 * -'</li>
+</ul>
+
+<p>The matchobjects, answer, and gsub! code need to be looped until all that is left is a solitary number.</p>
+
+
+
+<p>Including negative numbers in calculation:</p>
+
+<p>When running the tests, my regexp did not account for numbers which were negative.</p>
+
+<ul>
+<li>EX: '1 -1 + 4 2 8 - 3'</li>
+<li>regexp = /(\d+) (\d+) ([\-|\+|\*])/     => /(number1) (number2) (operand)/</li>
+<li>matchobjects = string.match regexp      => '1 -1 + 4 < 2 8 - > 3' when it should be '< 1 -1 + > 4 2 8 - 3'</li>
+</ul>
+
+<p>To account for this /(\d+) (\d+) ([\-|\+|\*])/ needed to be changed to /(-?\d+) (-?\d+) ([\-|\+|\*])/ for the possibility of negative numbers.</p>
+
+<ul>
+<li>EX: '1 -1 + 4 2 8 - 3'</li>
+<li>regexp = /(-?\d+) (-?\d+) ([\-|\+|\*])/     => /((maybe negative)full digit) ((maybe negative)full digit) (operand)/</li>
+<li>matchobjects = string.match regexp          => '< 1 -1 + > 4 2 8 - 3' # Excellent</li>
+<li>EX: '6 1 -1 + 4 2 8 - 3'</li>
+<li>regexp = /(-?\d+) (-?\d+) ([\-|\+|\*])/     => /((maybe negative)full digit) ((maybe negative)full digit) (operand)/</li>
+<li>matchobjects = string.match regexp          => '< 6 1 - >1 + 4 2 8 - 3' # Not excellent. We need to exclude the matching of an operand when a digit does not follow after it.</li>
+        
+<li>(new) regexp = /(-?\d+)\s(-?\d+)\s([\-|\+|\*])(?!\d)/     => /((maybe negative)</li>full digit) ((maybe negative)full digit) (operand)(don't allow digit here)/</li>
+<li>matchobjects = string.match regexp          => '6 < 1 -1 + > 4 2 8 - 3' # Excellent</li>
+</ul>
+
+<p><b>What I learned from this exercise:</b></p>
+
+<ul>
+<li>- further use of regexp</li>
+<li>- {|e| Integer(e) rescue e.to_sym } Converts element into Integer, if doing so gives an Error it will instead convert to Symbol (rescuing it from an error)</li>
+<li>- MatchData objects and how to use them</li>
+<li>- .send method - Still a lot to be learned</li>
+</ul>
+
+LINKS:<br>
+<ul>
+<li>http://www.tutorialspoint.com/ruby/ruby_strings.htm (MatchData objects)</li>
+<li>http://net.tutsplus.com/tutorials/ruby/ruby-for-newbies-regular-expressions/ (MatchData objects and .match)</li>
+<li>http://www.ruby-doc.org/core-2.0/Regexp.html (.match and MatchData objects)</li>
+<li>http://ruby-doc.org/core-2.0/Object.html#method-i-send (.send)</li>
+<li>http://stackoverflow.com/questions/12892045/send-method-in-ruby (.send)</li>
+<li>http://stackoverflow.com/questions/13719734/symbolize-any-non-digit-in-string-ruby (string to symbol for operands)</li>
+<li>http://stackoverflow.com/questions/5769467/to-find-the-integer-fixnum-values-in-ruby-array (string to symbol for operands)</li>
+<li>http://www.tutorialspoint.com/ruby/ruby_builtin_functions.htm</li>
+<li>http://mentalized.net/journal/2011/04/14/ruby_how_to_check_if_a_string_is_numeric (test if String a Number?)</li>
+<li>http://stackoverflow.com/questions/5769467/to-find-the-integer-fixnum-values-in-ruby-array (Integer(x))</li>
+</ul>
+
     </div>
     <!-- BODY-->
 
